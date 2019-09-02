@@ -38,7 +38,7 @@ public class Results extends AppCompatActivity {
         auszahlung2 = bundle.getString("auszahlung");
         netto2= bundle.getString("netto");
         brutto2= bundle.getString("brutto");
-        Lohrsteuergeld2=bundle.getString("Lohnsteuer");
+        Lohrsteuergeld2=bundle.getString("Lohrsteuergeld");
         Arbeitslosigkeitsteuergel2=bundle.getString("Arbeitslosigkeitsteuergel");
         Solidiritaetesteuergeld2=bundle.getString("Solidiritaetesteuergeld");
         Renterversicherungsteuergeld2=bundle.getString("Renterversicherungsteuergeld");

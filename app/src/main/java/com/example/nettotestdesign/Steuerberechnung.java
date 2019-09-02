@@ -128,8 +128,8 @@ public class Steuerberechnung
 	
 	//public enum ZeitraumType { JAHR, MONAT, WOCHE, TAG };
 	//public enum BundeslandType { NDS, SHW, SAAR, NRW, HH, BRE, HES, RPF, BW, BAY, MVO, BRA, BER, SA, SAAN, THUER };
-	String  ZeitraumType="MONAT";
-	String   bundesland="HESSEN";
+	String  ZeitraumType="شهر";
+	String   bundesland="هسن";
 	
 	//public Steuerberechnung( ZeitraumType zeitraum, BundeslandType bundesland, int jahr )
 	public Steuerberechnung( String zeitraum, String  bundesland, int jahr )
@@ -321,23 +321,23 @@ public class Steuerberechnung
 	    3 = Woche
 	    4 = Tag*/
 
-			if (zeitraum.matches("JAHR") ){
+			if (zeitraum.matches("سنة") ){
 
 				LZZ = 1;
 
 				zeitraumteiler = 1;
 
 			}
-		if (zeitraum.matches("MONAT")) {
+		if (zeitraum.matches("شهر")) {
 			LZZ = 2;
 			zeitraumteiler = 12;
 
 		}
-		if(zeitraum.matches("WOCHE") ){
+		if(zeitraum.matches("اسبوع") ){
 			LZZ = 3;
 			zeitraumteiler = 360 * 7;
 		}
-		if(zeitraum=="TAG") {
+		if(zeitraum=="يوم") {
 			LZZ = 4;
 			zeitraumteiler = 360;
 

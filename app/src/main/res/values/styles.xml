@@ -53,9 +53,7 @@
         </string-array>
 
     <string-array name="timezone_array">
-        <item>WOCHE</item>
-        <item>MONAT</item>
-        <item>YEAR</item>
+
         <item>اسبوع</item>
         <item>شهر</item>
         <item>سنة</item>
@@ -63,9 +61,6 @@
     </string-array>
 
     <string-array name="years_array">
-        <item>2014</item>
-        <item>2015</item>
-        <item>2016</item>
         <item>2017</item>
         <item>2018</item>
         <item>2019</item>

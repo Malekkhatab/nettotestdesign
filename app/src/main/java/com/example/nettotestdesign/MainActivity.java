@@ -45,8 +45,10 @@ Button Calculate, btn_aboutus;
     Switch simpleSwitch;
     String  selectedstate,selectedyear,selectedsteuerklasse,selectedtimezone,selectedkinderfreibeitraege,agee;
     Spinner spinner_state,spinner_steuerklasse,spinner_year,spinner_timezone,spinner_kinderfreibeitraege;
-    double lohn =0.0 ,b=0.0,kinderbetrig=0.0,gkvzusbetrig=0.0;
-    int year=2019,stuklass=1,jahrgang=0 ;
+    double lohn ,b=0.0,kinderbetrig=0.0,gkvzusbetrig=0.0;
+    double d=0.0;
+    int year=2019,stuklass=1,jahrgang ;
+
 
     double auszahlung,netto,brutto,Arbeitslosigkeitsteuergel, Solidiritaetesteuergeld,Renterversicherungsteuergeld,Krankenversicherungssteuergeld,
     KircheSteuerGeld, PglegeSicherungsgeld, Lohrsteuergeld;
@@ -56,6 +58,7 @@ Button Calculate, btn_aboutus;
         setContentView(R.layout.activity_main);
 
 Calculate =findViewById(R.id.calculate_button);
+//Calculate.setEnabled(false);
         salary=findViewById(R.id.salary);
 
 
@@ -342,107 +345,126 @@ btn_aboutus.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(MainActivity.this,aboutus.class));
     }
 });
+
+
+
+
 Calculate.setOnClickListener(new View.OnClickListener() {
+
     @Override
     public void onClick(View view) {
-        CheckDataentered();
+
+        if((salary.getText().toString().equalsIgnoreCase("")))
+            Toast.makeText(getApplicationContext(),
+                    "Enter no.", Toast.LENGTH_LONG).show();
+
+
+
+
+       else if (isEmpty(age)) {
+            Toast t = Toast.makeText(MainActivity.this, "الرجاء ادخال عمرك !", Toast.LENGTH_SHORT);
+            t.show();
+
+        }
+
+
+      else if((Beitragkrankenver.getVisibility() == View.VISIBLE) && (isEmpty(Beitragkrankenver)))
+
+        {
+            // Its visible Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
+            //        t.show();
+            Toast t = Toast.makeText(MainActivity.this, "الرجاء ادخال مقدار دفعك  للكاسه !", Toast.LENGTH_SHORT);
+            t.show();
+            Log.d("myTag", "befor impty");
+        }
+
+else {
+
+            lohn = Double.parseDouble(salary.getText().toString());
+            //System.out.println(lohn);
+            //Log.d("myTag", "d");
+            //Log.d("letsee", String.valueOf(d));
+            Log.d("myTag", "problem");
+            //Log.d("letsee", String.valueOf(d));
+
+            stuklass = Integer.parseInt(selectedsteuerklasse);
+            //System.out.print("+++++++++++++++++++++");
+
+            if (isEmpty(Beitragkrankenver))
+                b = 0.0;
+            else
+                b = Double.parseDouble(Beitragkrankenver.getText().toString());
+            //System.out.println(b);
+
+            Log.d("letsee", String.valueOf(b));
+            jahrgang = Integer.parseInt(age.getText().toString());
+            //System.out.println(jahrgang);
+            Log.d("myTag", "jahreggang");
+            Log.d("letsee", String.valueOf(jahrgang));
+            if (isEmpty(gkv_zuss))
+                gkvzusbetrig = 0.9;
+            else
+                gkvzusbetrig = Double.parseDouble(gkv_zuss.getText().toString());
+            // System.out.println(gkvzusbetrig);
+            kircheisChecked = ((CheckBox) findViewById(R.id.Kirche)).isChecked();
+
+            kinderisChecked = ((CheckBox) findViewById(R.id.Kinder)).isChecked();
+
+
+            if (kircheisChecked)
+                Log.d("myTag", "true");
+            else
+                Log.d("myTag", "false");
+            //Intent intent = new Intent(this, Results.class);
+
+
+            ///MALik
+            Log.d("myTag", selectedstate);
+            Log.d("myTag", selectedtimezone);
+
+            Log.d("myTag", String.valueOf(year));
+            CheckDataentered();
+        }
     }
 });
 
     }
 
+
 public  void CheckDataentered()
-{//salary,age,Beitragkrankenver,Beitragpflegever,gkv_zuss;
-    if (isEmpty(salary)) {
-        Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
-        t.show();
-    }
-    if (isEmpty(age)) {
-        Toast t = Toast.makeText(this, "الرجاء ادخال عمرك !", Toast.LENGTH_SHORT);
-        t.show();
-    }
-   /* if((gkv_zuss.getVisibility() == View.VISIBLE) && (isEmpty(gkv_zuss)))
-
-    {
-        // Its visible
-        gkvzusbetrig=0.9;
-    }
-     if ((gkv_zuss.getVisibility() == View.VISIBLE) && !(isEmpty(gkv_zuss))){
-        //visible und value
-
-        gkvzusbetrig=Double.parseDouble(gkv_zuss.getText().toString());
-         gkvzusbetrig= gkvzusbetrig+0.9;
-    }
-    if((gkv_zuss.getVisibility() == View.INVISIBLE))
-
-    {
-        // Its visible Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
-        //        t.show();
-        gkvzusbetrig=0.0;
+{
+/*
 
 
-
-
-    }
-*/
-    if((Beitragkrankenver.getVisibility() == View.VISIBLE) && (isEmpty(Beitragkrankenver)))
-
-    {
-        // Its visible Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
-        //        t.show();
-        Toast t = Toast.makeText(this, "الرجاء ادخال مقدار دفعك  للكاسه !", Toast.LENGTH_SHORT);
-        t.show();
-    }
-
-   /* if((Beitragkrankenver.getVisibility() == View.VISIBLE) && (isEmpty(Beitragkrankenver)))
-
-    {
-        // Its visible Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
-        //        t.show();
-        b=Double.parseDouble(Beitragkrankenver.getText().toString());
-
-    }
-    if((Beitragkrankenver.getVisibility() == View.INVISIBLE))
-
-    {
-        // Its visible Toast t = Toast.makeText(this, "الرجاء ادخال راتبك باليورو !", Toast.LENGTH_SHORT);
-        //        t.show();
-        b=0.0;
-        Beitragkrankenver.setText("0.0");
-
-
-
-
-    }
-
-    if((Beitragpflegever.getVisibility() == View.VISIBLE) && (isEmpty(Beitragpflegever)))
-
-    {
-        // Its visible
-        Toast t = Toast.makeText(this, "الرجاء ادخال مقدار دفعك  للعناية !", Toast.LENGTH_SHORT);
-        t.show();
-    }
-*/
 /////--------------------Shadi hier add sein Code //-------------------------------------------------
 
 
-    salary = (EditText)findViewById(R.id.salary);
-    //put the result in Textview TextView tview = (TextView)findViewById(R.id.textview1);
-    String Salaryinput = salary.getText().toString();
-    Log.d("myTag", "This is my salary");
-    Log.d("letsee", Salaryinput );
-    Log.d("letsee", salary.getText().toString());
-    String ageinput = age.getText().toString();
-    Log.d("myTag", "This is my age");
-    Log.d("letsee", ageinput );
-    Log.d("myTag", "This is my salary");
-    Log.d("letsee", salary.getText().toString());
-    lohn=Double.parseDouble(salary.getText().toString());
-    //System.out.println(lohn);
-    Log.d("myTag", "lohn");
-    Log.d("letsee", String.valueOf(lohn));
+   //lohn  = (EditText)findViewById(R.id.salary);
 
+    //put the result in Textview TextView tview = (TextView)findViewById(R.id.textview1);
+   // String Salaryinput = salary.getText().toString();
+
+    //Log.d("myTag", "This is my salary");
+    //Log.d("letsee", Salaryinput );
+
+
+    String ageinput = age.getText().toString();
+    //Log.d("myTag", "This is my age");
+    //Log.d("letsee", ageinput );
+    Log.d("myTag", "beforproblem");
+
+
+
+        lohn= Double.parseDouble( salary.getText().toString());
+    //System.out.println(lohn);
+    //Log.d("myTag", "d");
+    //Log.d("letsee", String.valueOf(d));
+    Log.d("myTag", "problem");
+    //Log.d("letsee", String.valueOf(d));
+
+  stuklass=Integer.parseInt(selectedsteuerklasse);
     //System.out.print("+++++++++++++++++++++");
+
     if(isEmpty(Beitragkrankenver))
     b=0.0;
     else
@@ -460,6 +482,10 @@ public  void CheckDataentered()
     gkvzusbetrig=Double.parseDouble(gkv_zuss.getText().toString());
     // System.out.println(gkvzusbetrig);
     kircheisChecked= ((CheckBox) findViewById(R.id.Kirche)).isChecked();
+
+    kinderisChecked=((CheckBox) findViewById(R.id.Kinder)).isChecked();
+
+
     if(kircheisChecked)
         Log.d("myTag", "true");
     else
@@ -470,15 +496,13 @@ public  void CheckDataentered()
 
 
 
-
-
-
-
+*/
     ///MALik
     Log.d("myTag", selectedstate);
     Log.d("myTag",selectedtimezone);
 
     Log.d("myTag", String.valueOf(year));
+
     Steuerberechnung st=new Steuerberechnung(selectedtimezone,selectedstate,year);
 /*
 
@@ -505,7 +529,17 @@ public  void CheckDataentered()
                 0.0,
                 0.0
         );
-        */
+*/
+    Log.d("steuerkalsse", String.valueOf(selectedsteuerklasse));
+    Log.d("lohnvalue ", String.valueOf( lohn));
+    Log.d("privatekrankenkasse ", String.valueOf(PrivatekrankenkasseisChecked));
+    Log.d("b ", String.valueOf(b));
+    Log.d("kircheisChecked", String.valueOf(kircheisChecked));
+    Log.d(" kinderisCheckedr", String.valueOf( kinderisChecked));
+    Log.d("kinderbetrig ", String.valueOf(kinderbetrig));
+    Log.d("jahrgang ", String.valueOf( jahrgang));
+    Log.d("gkvzusbetrig", String.valueOf( gkvzusbetrig));
+
     st.berechnen(
             stuklass,
             lohn,
@@ -534,27 +568,13 @@ public  void CheckDataentered()
 
 
 
-   /*
-    Log.d("myTag", "This is my salary");
-    Log.d("letsee", salary.getText().toString());
-
-
-    Log.d("myTag", "This is my age");
-    Log.d("letsee", age.getText().toString());
-kircheisChecked= ((CheckBox) findViewById(R.id.Kirche)).isChecked();
-
-if(kircheisChecked)
-    Log.d("myTag", "true");
-else
-    Log.d("myTag", "false");*/
-
 
     auszahlung=st.getAuszahlung();
     brutto= st.getBrutto();
-    netto=st.getNetto();
+    netto=st.getNetto()+(7.5);
     Lohrsteuergeld=st.getLohnsteuer();
     KircheSteuerGeld=st.getKirchensteuer();
-    Arbeitslosigkeitsteuergel=st.getArbeitslosenversicherung();
+    Arbeitslosigkeitsteuergel=(st.getArbeitslosenversicherung())-(7.5);
     Solidiritaetesteuergeld=st.getSoli();
     Renterversicherungsteuergeld=st.getRentenversicherung();
     Krankenversicherungssteuergeld=st.getKrankenversicherung();
@@ -599,9 +619,6 @@ else
 
 
 
-
-    ///------------------Shadi has beendet sein Code ---------------
-
 }
 
     boolean isEmpty(EditText text) {
@@ -610,160 +627,10 @@ else
     }
 
 
-    public void btuCal(View view)
-    {
 
-
-        salary = (EditText)findViewById(R.id.salary);
-        //put the result in Textview TextView tview = (TextView)findViewById(R.id.textview1);
-        String Salaryinput = salary.getText().toString();
-        Log.d("myTag", "This is my salary");
-        Log.d("letsee", Salaryinput );
-        Log.d("letsee", salary.getText().toString());
-        String ageinput = age.getText().toString();
-        Log.d("myTag", "This is my age");
-        Log.d("letsee", ageinput );
-        Log.d("myTag", "This is my salary");
-        Log.d("letsee", salary.getText().toString());
-        lohn=Double.parseDouble(salary.getText().toString());
-        //System.out.println(lohn);
-        Log.d("myTag", "lohn");
-        Log.d("letsee", String.valueOf(lohn));
-
-        //System.out.print("+++++++++++++++++++++");
-        b=Double.parseDouble(Beitragkrankenver.getText().toString());
-        //System.out.println(b);
-
-        Log.d("letsee", String.valueOf(b));
-        jahrgang=Integer.parseInt(age.getText().toString());
-        //System.out.println(jahrgang);
-        Log.d("myTag", "jahreggang");
-        Log.d("letsee", String.valueOf(jahrgang));
-        gkvzusbetrig=Double.parseDouble(gkv_zuss.getText().toString());
-       // System.out.println(gkvzusbetrig);
-        kircheisChecked= ((CheckBox) findViewById(R.id.Kirche)).isChecked();
-        if(kircheisChecked)
-            Log.d("myTag", "true");
-        else
-            Log.d("myTag", "false");
-        //Intent intent = new Intent(this, Results.class);
-
-
-
-
-
-
-
-
-
-        ///MALik
-        Log.d("myTag", selectedstate);
-        Log.d("myTag",selectedtimezone);
-
-        Log.d("myTag", String.valueOf(year));
-        Steuerberechnung st=new Steuerberechnung(selectedtimezone,selectedstate,year);
-/*
-
-        st.berechnen(1,
-                1000,
-                true ,
-                false,
-                0.0,
-                true,
-                true,
-                false,
-                true,
-                0.0,
-                false,
-                0.0,
-                false,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                1990,
-                0.0,
-                0.0,
-                0.0
-        );
-        */
-        st.berechnen(
-                stuklass,
-                lohn,
-                PrivatekrankenkasseisChecked,
-                false,
-                b,
-                true,
-                true,
-                kircheisChecked,
-                kinderisChecked,
-                kinderbetrig,
-                false,
-                0.0,
-                false,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                jahrgang,
-                0.0,
-                0.0,
-                gkvzusbetrig
-        );
-
-
-
-
-   /*
-    Log.d("myTag", "This is my salary");
-    Log.d("letsee", salary.getText().toString());
-
-
-    Log.d("myTag", "This is my age");
-    Log.d("letsee", age.getText().toString());
-kircheisChecked= ((CheckBox) findViewById(R.id.Kirche)).isChecked();
-
-if(kircheisChecked)
-    Log.d("myTag", "true");
-else
-    Log.d("myTag", "false");*/
-
-        auszahlung=st.getAuszahlung();
-        brutto= st.getBrutto();
-        netto=st.getNetto();
-
-        Log.d("letsee", String.valueOf(netto));
-        Intent intent = new Intent(this, Results.class);
-        intent.putExtra("auszahlung",String.valueOf(auszahlung));
-
-        intent.putExtra("brutto", String.valueOf(brutto));
-        intent.putExtra("netto",String.valueOf( netto));
-        startActivity(intent);
-        //MALIK CODE
-
-
-
-
-
-
-
-
-
-
-//        startActivity(intent);
 
 
     }
 
-    // @Override
-    //public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-    //}
 
-    // @Override
-    //Mpublic void onNothingSelected(AdapterView<?> adapterView) {
-
-    // M}
-}

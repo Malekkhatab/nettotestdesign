@@ -83,12 +83,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:inputType="numberDecimal"
             android:hint="الراتب" />
         <EditText
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:inputType="numberDecimal"
             android:hint="العمر"/>
 
 
@@ -126,6 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:inputType="numberDecimal"
                     android:hint="مبلغ إضافي تضيفه الشركات  يدفع فوق 0.9"/>
                 <RadioButton
                     android:id="@+id/Private_Krankenkasse_RadioButton"
@@ -136,6 +139,7 @@
                     android:id="@+id/pkv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
                     android:layout_marginTop="20dp"
                     android:hint="النسبة المئوية للدفع لشركة التأمين الخاص"/>
 
@@ -144,6 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:inputType="numberDecimal"
                     android:hint="النسبة المئوية للدفع للعناية"/>
 
 
@@ -208,7 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            
+
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="من نحن " />
