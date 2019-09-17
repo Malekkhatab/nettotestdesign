@@ -87,7 +87,7 @@
     </string-array>
 
     <string name="calculate">احسب الضرائب </string>
-    <string name="register_form_text">أهلأ بكم في برنامج  حساب الصافي والضرائب في المانيا البرنامج العربي الأول.</string>
+    <string name="register_form_text">أهلأ بكم في البرنامج العربي الأول لحساب الصافي والضرائب في المانيا  .</string>
     <string name="no_field_can_be_empty">الرجاء تعبئة كافة الحقول المطلوبة </string>
 
 </resources>

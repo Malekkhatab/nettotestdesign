@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+        <item android:id="@+id/aboutus_id"
+            android:icon="@mipmap/cover"
+            android:title="من نحن "
+            app:showAsAction="ifRoom"/>
+
+        <item android:id="@+id/info_id"
+            android:icon="@mipmap/info"
+            android:title="معلومات"
+            app:showAsAction="ifRoom"/>
+
+
+</menu>

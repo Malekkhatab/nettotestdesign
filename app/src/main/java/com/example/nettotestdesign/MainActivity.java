@@ -1,11 +1,15 @@
 package com.example.nettotestdesign;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -33,8 +37,7 @@ public class MainActivity extends AppCompatActivity  {
     EditText salary,age,Beitragkrankenver,Beitragpflegever,gkv_zuss;
 
 
-    //RadioButton publicee, privatee ,mitzuschuss,ohnezuschuss,Kinder;
-Button Calculate, btn_aboutus;
+    Button Calculate, btn_aboutus;
     RadioGroup kv_radiogroup;
     RadioButton kv_private,kv_gesetzlich;
     boolean kircheisChecked,kinderisChecked,PrivatekrankenkasseisChecked;
@@ -52,6 +55,8 @@ Button Calculate, btn_aboutus;
 
     double auszahlung,netto,brutto,Arbeitslosigkeitsteuergel, Solidiritaetesteuergeld,Renterversicherungsteuergeld,Krankenversicherungssteuergeld,
     KircheSteuerGeld, PglegeSicherungsgeld, Lohrsteuergeld;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -338,13 +343,6 @@ Calculate =findViewById(R.id.calculate_button);
         //else {
         //  Kirche=false;
         //}
-btn_aboutus=(Button) findViewById(R.id.aboutus_button);
-btn_aboutus.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(MainActivity.this,aboutus.class));
-    }
-});
 
 
 
@@ -356,7 +354,7 @@ Calculate.setOnClickListener(new View.OnClickListener() {
 
         if((salary.getText().toString().equalsIgnoreCase("")))
             Toast.makeText(getApplicationContext(),
-                    "Enter no.", Toast.LENGTH_LONG).show();
+                    "ادخل الراتب.", Toast.LENGTH_LONG).show();
 
 
 
@@ -431,79 +429,17 @@ else {
     }
 
 
-public  void CheckDataentered()
+    public  void CheckDataentered()
 {
-/*
 
-
-/////--------------------Shadi hier add sein Code //-------------------------------------------------
-
-
-   //lohn  = (EditText)findViewById(R.id.salary);
-
-    //put the result in Textview TextView tview = (TextView)findViewById(R.id.textview1);
-   // String Salaryinput = salary.getText().toString();
-
-    //Log.d("myTag", "This is my salary");
-    //Log.d("letsee", Salaryinput );
-
-
-    String ageinput = age.getText().toString();
-    //Log.d("myTag", "This is my age");
-    //Log.d("letsee", ageinput );
-    Log.d("myTag", "beforproblem");
-
-
-
-        lohn= Double.parseDouble( salary.getText().toString());
-    //System.out.println(lohn);
-    //Log.d("myTag", "d");
-    //Log.d("letsee", String.valueOf(d));
-    Log.d("myTag", "problem");
-    //Log.d("letsee", String.valueOf(d));
-
-  stuklass=Integer.parseInt(selectedsteuerklasse);
-    //System.out.print("+++++++++++++++++++++");
-
-    if(isEmpty(Beitragkrankenver))
-    b=0.0;
-    else
-    b=Double.parseDouble(Beitragkrankenver.getText().toString());
-    //System.out.println(b);
-
-    Log.d("letsee", String.valueOf(b));
-    jahrgang=Integer.parseInt(age.getText().toString());
-    //System.out.println(jahrgang);
-    Log.d("myTag", "jahreggang");
-    Log.d("letsee", String.valueOf(jahrgang));
-    if(isEmpty(gkv_zuss))
-        gkvzusbetrig=0.9;
-    else
-    gkvzusbetrig=Double.parseDouble(gkv_zuss.getText().toString());
-    // System.out.println(gkvzusbetrig);
-    kircheisChecked= ((CheckBox) findViewById(R.id.Kirche)).isChecked();
-
-    kinderisChecked=((CheckBox) findViewById(R.id.Kinder)).isChecked();
-
-
-    if(kircheisChecked)
-        Log.d("myTag", "true");
-    else
-        Log.d("myTag", "false");
-    //Intent intent = new Intent(this, Results.class);
-
-
-
-
-
-*/
     ///MALik
-    Log.d("myTag", selectedstate);
+   /* Log.d("myTag", selectedstate);
     Log.d("myTag",selectedtimezone);
 
-    Log.d("myTag", String.valueOf(year));
+    Log.d("myTag", String.valueOf(year));*/
 
     Steuerberechnung st=new Steuerberechnung(selectedtimezone,selectedstate,year);
+
 /*
 
         st.berechnen(1,
@@ -530,6 +466,7 @@ public  void CheckDataentered()
                 0.0
         );
 */
+/*
     Log.d("steuerkalsse", String.valueOf(selectedsteuerklasse));
     Log.d("lohnvalue ", String.valueOf( lohn));
     Log.d("privatekrankenkasse ", String.valueOf(PrivatekrankenkasseisChecked));
@@ -539,6 +476,9 @@ public  void CheckDataentered()
     Log.d("kinderbetrig ", String.valueOf(kinderbetrig));
     Log.d("jahrgang ", String.valueOf( jahrgang));
     Log.d("gkvzusbetrig", String.valueOf( gkvzusbetrig));
+
+
+ */
 
     st.berechnen(
             stuklass,
@@ -581,7 +521,7 @@ public  void CheckDataentered()
     PglegeSicherungsgeld=st.getPflegeversicherung();
    // Lohrsteuergeld=st.getLohnsteuer();
 
-
+/*
     Log.d("netto after call", String.valueOf(netto));
     Log.d("Kircheafter call ", String.valueOf( KircheSteuerGeld));
     Log.d("Arbfter call ", String.valueOf(Arbeitslosigkeitsteuergel));
@@ -590,7 +530,7 @@ public  void CheckDataentered()
     Log.d("Kranken after", String.valueOf(Krankenversicherungssteuergeld));
     Log.d("pflege after ", String.valueOf(PglegeSicherungsgeld));
     Log.d("lohnsteuer after ", String.valueOf( Lohrsteuergeld));
-
+*/
 
     Intent intent = new Intent(this, Results.class);
     intent.putExtra("auszahlung",String.valueOf(auszahlung));
@@ -627,10 +567,46 @@ public  void CheckDataentered()
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.home_menu,menu);
+
+
+        return true;
+    }
+
+    //wenn click on top Meun
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.aboutus_id:
+			
+       Intent intent1 = new Intent(this,aboutus.class );
+                startActivity(intent1);
+			
+                return true;
+
+
+            case  R.id.info_id:
+			
+        Intent intent2 = new Intent(this, info.class);
+                startActivity(intent2);
+			
+						
+                return true;
+
+
+            default:
+                    return super.onOptionsItemSelected(item);
+        }
+
 
 
 
     }
+}
 
 
 
